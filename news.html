@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Store - Latest News</title>
+    <link rel="stylesheet" href="external.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #67adcf 0%, #35383c 100%);
+            color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #news {
+            max-width: 700px;
+            margin: 40px auto;
+            background: rgba(34, 40, 49, 0.97);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+            padding: 32px 40px;
+        }
+        #news h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 32px;
+            letter-spacing: 2px;
+            color: #00adb5;
+        }
+        .news-item {
+            background: rgba(57, 62, 70, 0.95);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .news-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 6px 24px rgba(0,173,181,0.15);
+        }
+        .news-item h3 {
+            margin-top: 0;
+            color: #00adb5;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        .news-item p {
+            margin: 0 0 12px 0;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        .date {
+            display: inline-block;
+            font-size: 0.95rem;
+            color: #eeeeee;
+            background: #393e46;
+            padding: 4px 14px;
+            border-radius: 8px;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 600px) {
+            #news {
+                padding: 18px 6vw;
+            }
+            .news-item {
+                padding: 16px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section id="news">
+        <h2>Latest News</h2>
+        <article class="news-item">
+            <h3>Summer Sale Starts Now!</h3>
+            <p>Enjoy up to <strong>70% off</strong> on top games during our annual Summer Sale. Limited time only!</p>
+            <span class="date">June 10, 2024</span>
+        </article>
+        <article class="news-item">
+            <h3>New Release: Galaxy Quest</h3>
+            <p><strong>Galaxy Quest</strong> is now available! Embark on an epic space adventure with stunning graphics and immersive gameplay.</p>
+            <span class="date">June 8, 2024</span>
+        </article>
+        <article class="news-item">
+            <h3>Pre-order: Racing Legends 2024</h3>
+            <p>Pre-orders are open for <strong>Racing Legends 2024</strong>. Get exclusive in-game items with your pre-order!</p>
+            <span class="date">June 5, 2024</span>
+        </article>
+    </section>
+</body>
+</html>

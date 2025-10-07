@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Store - GameVerse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="external.css">
+  <style>
+    :root {
+      --primary: #232946;
+      --accent: #eebbc3;
+      --background: #f3f6fa;
+      --card-bg: #fff;
+      --text: #222;
+      --shadow: 0 4px 16px rgba(35,41,70,0.07);
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--background);
+      margin: 0;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 32px 0 16px 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: fadeDown 1s;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    header h1 {
+      margin: 0 0 8px 0;
+      font-size: 2.7rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      animation: fadeIn 1.2s;
+    }
+    nav {
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      animation: fadeIn 1.5s;
+    }
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding: 6px 18px;
+      border-radius: 4px;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    nav a:hover, nav a:focus {
+      color: var(--primary);
+      background: var(--accent);
+      box-shadow: 0 2px 8px rgba(238,187,195,0.15);
+      text-decoration: none;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 16px 16px 16px;
+      animation: fadeIn 1.5s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 32px;
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: 1px;
+      animation: fadeIn 1.7s;
+    }
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin: 32px 0;
+    }
+    .game-grid article {
+      background: var(--card-bg);
+      padding: 24px 18px 18px 18px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 540px;
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow var(--transition), transform var(--transition);
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation: cardFadeIn 0.7s forwards;
+      animation-delay: calc(var(--i) * 0.08s);
+    }
+    @keyframes cardFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    .game-grid article:hover {
+      box-shadow: 0 12px 32px rgba(35,41,70,0.18);
+      transform: translateY(-8px) scale(1.03);
+      border: 2px solid var(--accent);
+    }
+    .game-grid img {
+      width: 100%;
+      max-width: 340px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 12px rgba(35,41,70,0.10);
+      transition: transform var(--transition), box-shadow var(--transition);
+      will-change: transform;
+    }
+    .game-grid article:hover img {
+      transform: scale(1.05) rotate(-1deg);
+      box-shadow: 0 8px 24px rgba(238,187,195,0.18);
+    }
+    .game-grid h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.35rem;
+      color: var(--primary);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color var(--transition);
+    }
+    .game-grid p {
+      font-size: 1rem;
+      margin: 0 0 12px 0;
+      color: #444;
+      line-height: 1.5;
+    }
+    .game-grid strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .game-grid button {
+      margin-top: auto;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 32px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 2px 8px rgba(35,41,70,0.10);
+      letter-spacing: 0.5px;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-grid button::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      background: var(--accent);
+      opacity: 0.2;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.4s, height 0.4s;
+      z-index: 0;
+    }
+    .game-grid button:active::after {
+      width: 120%;
+      height: 400%;
+      transition: 0s;
+    }
+    .game-grid button:hover, .game-grid button:focus {
+      background: var(--accent);
+      color: var(--primary);
+      transform: scale(1.07);
+      box-shadow: 0 6px 24px rgba(238,187,195,0.18);
+    }
+    @media (max-width: 900px) {
+      .game-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .game-grid img {
+        height: 160px;
+      }
+      main {
+        padding: 24px 8px 8px 8px;
+      }
+    }
+    @media (max-width: 600px) {
+      .game-grid {
+        grid-template-columns: 1fr;
+      }
+      .game-grid img {
+        height: 120px;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+      .game-grid article {
+        min-height: 420px;
+      }
+    }
+    footer {
+      background: var(--primary);
+      color: var(--accent);
+      text-align: center;
+      padding: 22px 0 16px 0;
+      margin-top: 48px;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+      animation: fadeUp 1.2s;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      background: var(--background);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 8px;
+    }
+  </style>
+  <script>
+    // Animate cards on load with stagger
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.game-grid article').forEach((el, i) => {
+        el.style.setProperty('--i', i);
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>GameVerse Store</h1>
+    <nav>
+      <a href="index.html">Home</a> 
+      <a href="store.html">Store</a> 
+      <a href="terms.html">Terms</a> 
+      <a href="privacy.html">Privacy</a> 
+      <a href="support.html">Support</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Featured Games</h2>
+    <section class="game-grid">
+      <!-- Game 1 -->
+      <article>
+        <h3>Cyber Rush</h3>
+        <img src="cyberpunk.jpg" alt="Cyber Rush Game Cover">
+        <p>A futuristic open-world racer with incredible visuals. Race through neon-lit cities, customize your high-tech vehicles, and compete in adrenaline-pumping tournaments. Experience a gripping story set in a cyberpunk universe, with dynamic weather and a pulsating electronic soundtrack.</p>
+        <p><strong>Price:</strong> $29.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 2 -->
+      <article>
+        <h3>Shadow Arena</h3>
+        <img src="shadow fight areana.jpg" alt="Shadow Arena Game Cover">
+        <p>Dark fantasy battle royale with intense combat. Choose your hero, master unique abilities, and survive against dozens of opponents in mystical arenas. Team up or go solo as you unlock powerful weapons and uncover ancient secrets hidden in the shadows.</p>
+        <p><strong>Price:</strong> $19.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 3 -->
+      <article>
+        <h3>Galaxy Wars</h3>
+        <img src="galaxy_wars.jpg" alt="Galaxy Wars Game Cover">
+        <p>Space RTS with galactic conquest gameplay. Build your fleet, colonize planets, and engage in epic space battles. Form alliances, research advanced technologies, and lead your civilization to victory across a vast, procedurally generated galaxy.</p>
+        <p><strong>Price:</strong> $39.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 4 -->
+      <article>
+        <h3>Minecraft</h3>
+        <img src="minecraft.jpg" alt="Minecraft">
+        <p>Sandbox game where you create your world block by block. Explore endless landscapes, craft tools, build structures, and survive against monsters. Play solo or with friends in creative or survival modes, and let your imagination run wild.</p>
+        <p><strong>Price:</strong> Free</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 5 -->
+      <article>
+        <h3>Dragon Quest Legends</h3>
+        <img src="dragon-quest-6-button-edit-1641513270120.jpg" alt="Dragon Quest Legends Game Cover">
+        <p>Epic RPG adventure with dragons, magic, and quests. Embark on a journey through enchanted lands, battle legendary creatures, and uncover ancient artifacts. Customize your hero, form a party, and shape the fate of the kingdom through your choices.</p>
+        <p><strong>Price:</strong> $34.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 6 -->
+      <article>
+        <h3>Pixel Racers</h3>
+        <img src="pixel_racer.jpeg" alt="Pixel Racers Game Cover">
+        <p>Retro-style racing game with pixel graphics and fast action. Race on challenging tracks, unlock new cars, and compete in time trials. Enjoy split-screen multiplayer and a nostalgic chiptune soundtrack that brings back classic arcade vibes.</p>
+        <p><strong>Price:</strong> $9.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 7 -->
+      <article>
+        <h3>Zombie Outbreak</h3>
+        <img src="zombie racer.jpeg" alt="Zombie Outbreak Game Cover">
+        <p>Survive waves of zombies in this thrilling action shooter. Scavenge for weapons, build barricades, and team up with friends in co-op mode. Face terrifying bosses and uncover the mystery behind the outbreak in a gripping campaign.</p>
+        <p><strong>Price:</strong> $14.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 8 -->
+      <article>
+        <h3>Farm Life Simulator</h3>
+        <img src="farm simulator.jpeg" alt="Farm Life Simulator Game Cover">
+        <p>Manage your own farm, grow crops, and raise animals. Upgrade equipment, expand your land, and participate in seasonal festivals. Experience relaxing gameplay with realistic weather, day-night cycles, and a charming rural community.</p>
+        <p><strong>Price:</strong> $12.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 9 -->
+      <article>
+        <h3>Alien Invasion</h3>
+        <img src="alien invasionn.jpeg" alt="Alien Invasion Game Cover">
+        <p>Defend Earth from alien attackers in this sci-fi shooter. Pilot advanced spacecraft, upgrade your arsenal, and battle through intense missions. Unravel a gripping story as you fight to save humanity from extinction.</p>
+        <p><strong>Price:</strong> $17.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 10 -->
+      <article>
+        <h3>Castle Defender</h3>
+        <img src="castle.jpeg" alt="Castle Defender Game Cover">
+        <p>Strategically defend your castle from waves of enemies. Build towers, recruit heroes, and deploy traps to stop invaders. Upgrade your defenses and unlock new abilities as you progress through challenging levels.</p>
+        <p><strong>Price:</strong> $11.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 11 -->
+      <article>
+        <h3>Space Miner Tycoon</h3>
+        <img src="space_miner.jpeg" alt="Space Miner Tycoon Game Cover">
+        <p>Mine asteroids, upgrade ships, and build your space empire. Manage resources, hire crew, and explore uncharted sectors. Compete with rival corporations and discover rare minerals in a vast universe.</p>
+        <p><strong>Price:</strong> $21.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 12 -->
+      <article>
+        <h3>Magic Academy</h3>
+        <img src="magic_academy.jpeg" alt="Magic Academy Game Cover">
+        <p>Learn spells and battle rivals in a magical school setting. Attend classes, master elemental magic, and solve magical mysteries. Form friendships, duel other students, and rise to the top of the academy ranks.</p>
+        <p><strong>Price:</strong> $15.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 13 -->
+      <article>
+        <h3>City Builder Pro</h3>
+        <img src="city builder.jpeg" alt="City Builder Pro Game Cover">
+        <p>Design, build, and manage your own modern city. Balance budgets, provide services, and respond to disasters. Grow your city from a small town to a bustling metropolis with realistic simulation and detailed customization.</p>
+        <p><strong>Price:</strong> $27.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 14 -->
+      <article>
+        <h3>Jungle Adventure</h3>
+        <img src="jungle adventure.jpg" alt="Jungle Adventure Game Cover">
+        <p>Explore mysterious jungles and uncover hidden treasures. Solve ancient puzzles, avoid traps, and battle wild creatures. Embark on a thrilling quest filled with secrets, lush environments, and challenging platforming.</p>
+        <p><strong>Price:</strong> $13.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+      <!-- Game 15 -->
+      <article>
+        <h3>Rogue Agents</h3>
+        <img src="rogue_one.jpg" alt="Rogue Agents Game Cover">
+        <p>Espionage shooter with stealth gameplay mechanics. Infiltrate enemy bases, hack security systems, and complete covert missions. Choose your approach—silent or aggressive—and unlock gadgets to outsmart your foes.</p>
+        <p><strong>Price:</strong> $24.99</p>
+        <button onclick="alert('Purchase completed')">Buy Now</button>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 GameVerse. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

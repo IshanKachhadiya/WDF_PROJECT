@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GameVerse - Your Game Store</title>
+  <link rel="stylesheet" href="external.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00ffd0;
+      --primary-dark: #00cfa6;
+      --bg: #181a1b;
+      --bg-light: #23272a;
+      --bg-featured: #202225;
+      --text: #f3f3f3;
+      --text-muted: #e0e0e0;
+      --footer: #b0b0b0;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --transition: 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      background: var(--bg-light);
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: fadeDown 1s;
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .logo h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--primary);
+      font-weight: 700;
+      text-shadow: 0 2px 16px rgba(0,255,208,0.15);
+      animation: logoPop 1.2s;
+    }
+    @keyframes logoPop {
+      0% { transform: scale(0.8); opacity: 0;}
+      60% { transform: scale(1.1);}
+      100% { transform: scale(1); opacity: 1;}
+    }
+    nav ul {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.08rem;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+      position: relative;
+    }
+    nav ul li a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width var(--transition);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    nav ul li a:hover {
+      background: var(--primary);
+      color: var(--bg);
+      box-shadow: 0 2px 12px rgba(0,255,208,0.12);
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 70px 40px 50px 40px;
+      background: linear-gradient(90deg, var(--bg-light) 60%, var(--primary) 100%);
+      gap: 40px;
+      min-height: 480px;
+      animation: fadeUp 1.2s;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .hero-text {
+      max-width: 520px;
+      animation: slideLeft 1.2s;
+    }
+    @keyframes slideLeft {
+      from { opacity: 0; transform: translateX(-60px);}
+      to { opacity: 1; transform: translateX(0);}
+    }
+    .hero-text h2 {
+      font-size: 2.7rem;
+      margin-bottom: 18px;
+      color: var(--primary);
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 16px rgba(0,255,208,0.10);
+      animation: textPop 1.4s;
+    }
+    @keyframes textPop {
+      0% { transform: scale(0.95); opacity: 0;}
+      60% { transform: scale(1.05);}
+      100% { transform: scale(1); opacity: 1;}
+    }
+    .hero-text p {
+      font-size: 1.22rem;
+      margin-bottom: 32px;
+      color: var(--text-muted);
+      animation: fadeIn 1.6s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    .cta-button {
+      background: var(--primary);
+      color: var(--bg);
+      padding: 16px 40px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+      box-shadow: 0 4px 24px rgba(0,255,208,0.10);
+      cursor: pointer;
+      animation: bounceIn 1.8s;
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.8);}
+      60% { transform: scale(1.1);}
+      100% { transform: scale(1);}
+    }
+    .cta-button:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 8px 32px rgba(0,255,208,0.18);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .hero-image {
+      animation: slideRight 1.2s;
+    }
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(60px);}
+      to { opacity: 1; transform: translateX(0);}
+    }
+    .hero-image img {
+      border-radius: 18px;
+      box-shadow: 0 6px 32px rgba(0,0,0,0.28);
+      max-width: 370px;
+      width: 100%;
+      height: auto;
+      transition: transform var(--transition), box-shadow var(--transition);
+      animation: imgPop 1.5s;
+    }
+    @keyframes imgPop {
+      0% { transform: scale(0.95); opacity: 0;}
+      60% { transform: scale(1.05);}
+      100% { transform: scale(1); opacity: 1;}
+    }
+    .hero-image img:hover {
+      transform: scale(1.04) rotate(-2deg);
+      box-shadow: 0 12px 48px rgba(0,255,208,0.10);
+    }
+    .featured {
+      padding: 70px 40px 50px 40px;
+      background: var(--bg-featured);
+      animation: fadeUp 1.2s;
+    }
+    .featured h2 {
+      font-size: 2.1rem;
+      margin-bottom: 38px;
+      color: var(--primary);
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+      animation: textPop 1.4s;
+    }
+    .game-grid {
+      display: flex;
+      gap: 36px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .game-card {
+      background: var(--bg-light);
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+      padding: 28px 24px;
+      width: 310px;
+      text-align: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+      animation: cardFade 1.2s;
+    }
+    @keyframes cardFade {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 120px; height: 120px;
+      background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+      opacity: 0.12;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .game-card:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 12px 48px rgba(0,255,208,0.13);
+    }
+    .game-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,255,208,0.07);
+      transition: transform var(--transition);
+    }
+    .game-card:hover img {
+      transform: scale(1.05);
+    }
+    .game-card h3 {
+      margin: 0 0 12px 0;
+      color: var(--primary);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .game-card p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+    }
+    .btn {
+      background: var(--primary);
+      color: var(--bg);
+      padding: 12px 28px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+      font-size: 1.05rem;
+      cursor: pointer;
+      box-shadow: 0 2px 12px rgba(0,255,208,0.08);
+    }
+    .btn:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 8px 32px rgba(0,255,208,0.10);
+      transform: translateY(-2px) scale(1.04);
+    }
+    .newsletter {
+      background: var(--bg-light);
+      padding: 54px 40px;
+      text-align: center;
+      animation: fadeUp 1.2s;
+    }
+    .newsletter h2 {
+      color: var(--primary);
+      margin-bottom: 22px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      animation: textPop 1.4s;
+    }
+    .newsletter form {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+      animation: fadeIn 1.6s;
+    }
+    .newsletter input[type="email"] {
+      padding: 14px 18px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1.05rem;
+      width: 270px;
+      outline: none;
+      margin-bottom: 8px;
+      background: #202225;
+      color: var(--text);
+      transition: box-shadow var(--transition);
+      box-shadow: 0 2px 8px rgba(0,255,208,0.07);
+    }
+    .newsletter input[type="email"]:focus {
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .newsletter button {
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: none;
+      background: var(--primary);
+      color: var(--bg);
+      font-weight: bold;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+      margin-bottom: 8px;
+      box-shadow: 0 2px 12px rgba(0,255,208,0.08);
+    }
+    .newsletter button:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 8px 32px rgba(0,255,208,0.10);
+      transform: translateY(-2px) scale(1.04);
+    }
+    footer {
+      background: var(--bg);
+      color: var(--footer);
+      text-align: center;
+      padding: 36px 0 22px 0;
+      font-size: 1.05rem;
+      margin-top: 0;
+      animation: fadeIn 1.6s;
+    }
+    footer nav {
+      margin-top: 12px;
+    }
+    footer nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 12px;
+      transition: color var(--transition);
+      font-weight: 500;
+    }
+    footer nav a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+    /* Animations for scroll */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s, transform 0.8s;
+    }
+    [data-animate].animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 28px;
+        min-height: unset;
+      }
+      .hero-image img {
+        max-width: 90vw;
+      }
+      .featured, .newsletter {
+        padding: 44px 8vw;
+      }
+      header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 24px 8vw;
+      }
+      .game-card {
+        width: 90vw;
+        max-width: 340px;
+      }
+    }
+    @media (max-width: 600px) {
+      .game-grid {
+        flex-direction: column;
+        gap: 28px;
+      }
+      .featured, .newsletter {
+        padding: 32px 4vw;
+      }
+      header {
+        padding: 18px 4vw;
+      }
+      .logo h1 {
+        font-size: 1.6rem;
+      }
+      .hero-text h2 {
+        font-size: 1.5rem;
+      }
+      .featured h2 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <h1>Area 51</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="store.html">Store</a></li>
+        <li><a href="library.html">Library</a></li>
+        <li><a href="deals.html">Deals</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero" data-animate>
+    <div class="hero-text">
+      <h2>Discover and Play Amazing Games</h2>
+      <p>Download the GameVerse Launcher and access exclusive deals, free games, and more!</p>
+      <a href="#" class="cta-button">Download Launcher</a>
+    </div>
+    <div class="hero-image">
+      <img src="icon.jpg" alt="Featured Game" height="400">
+    </div>
+  </section>
+
+  <!-- Featured Games -->
+  <section class="featured" data-animate>
+    <h2>Featured Games</h2>
+    <div class="game-grid">
+      <article class="game-card" data-animate>
+        <img src="cyberpunk.jpg" alt="Game 1" />
+        <h3>Cyber Rush</h3>
+        <p>Experience the future of open-world racing.</p>
+        <a href="#" class="btn">View Game</a>
+      </article>
+      <article class="game-card" data-animate>
+        <img src="shadow fight areana.jpg" alt="Game 2" />
+        <h3>Shadow Arena</h3>
+        <p>Battle royale with dark fantasy vibes.</p>
+        <a href="#" class="btn">View Game</a>
+      </article>
+      <article class="game-card" data-animate>
+        <img src="city builder.jpeg" alt="Game 3" />
+        <h3>City Builder Pro</h3>
+        <p>Explore mysterious jungles and uncover hidden treasures.</p>
+        <a href="#" class="btn">View Game</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter" data-animate>
+    <h2>Subscribe for Weekly Game Updates</h2>
+    <form>
+      <input type="email" placeholder="Enter your email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 GameVerse. All rights reserved.</p>
+    <nav>
+      <a href="terms.html">Terms</a> |
+      <a href="privacy.html">Privacy</a> |
+      <a href="support.html">Support</a>
+    </nav>
+  </footer>
+
+  <script>
+    // Animate on scroll
+    function animateOnScroll() {
+      const elements = document.querySelectorAll('[data-animate]');
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60) {
+          el.classList.add('animated');
+        }
+      });
+    }
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('DOMContentLoaded', animateOnScroll);
+  </script>
+</body>
+</html>
